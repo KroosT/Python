@@ -1,0 +1,6 @@
+Uncomment this option if you want to customize path to IDE config folder. Make sure you're using forward slashes.
+2
+6
+2 5 9 0 1 3 4 7 6 8
+add 4 car 54 96 34
+16
