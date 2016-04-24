@@ -50,7 +50,7 @@ class XRange(object):
 # Test our oun xrange()
 def test_xrange():
 
-    for x in XRange(99):
+    for x in XRange(5):
         print x
 
 test_xrange()
