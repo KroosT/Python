@@ -1,7 +1,7 @@
 def to_json(obj, raise_unknown=False):
     string = ""
     count = 0
-    if type(obj) == type({}):
+    if isinstance(obj, dict):
         string += "{"
         for element in obj:
             count += 1
@@ -10,7 +10,7 @@ def to_json(obj, raise_unknown=False):
                 string += ", "
         return string + "}"
 
-    elif type(obj) == type([]):
+    elif isinstance(obj, list) or isinstance(obj, tuple):
         string += "["
         for element in obj:
             count += 1
@@ -58,5 +58,5 @@ class Unknown(object):
         self.a = 3
 
 x = Unknown()
-lst = [1, {"a": 1}, 5, "434", 'ewe', [{"fsd": "fd"}]]
+lst = [1, {"a": 1}, 5, "434", 'ewe', [{"fsd": "fd"}, (1, 3)]]
 print to_json(lst)
