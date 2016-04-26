@@ -21,11 +21,11 @@ class XRange(object):
         elif step < 0:
             stop = min(stop, start)
             last = max(stop, start)
-            step_sign = 1
+            step_sign = -1
         else:
             stop = max(stop, start)
             last = min(stop, start)
-            step_sign = 0
+            step_sign = 1
 
         self._start = start
         self._stop = stop
@@ -38,7 +38,7 @@ class XRange(object):
 
     def next(self):
         self._last += self._step
-        if self._step_sign == 0:
+        if self._step_sign > 0:
             if self._last >= self._stop:
                 raise StopIteration()
         else:
@@ -50,7 +50,7 @@ class XRange(object):
 # Test our oun xrange()
 def test_xrange():
 
-    for x in XRange(5):
+    for x in XRange(5, 3, -1):
         print x
 
 test_xrange()
