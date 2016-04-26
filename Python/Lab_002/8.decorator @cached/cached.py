@@ -1,7 +1,7 @@
 def cached(function):
 
     def wrapper(*args):
-
+        
         wrapper.previous_args = ""
         try:
             wrapper.count += 1
