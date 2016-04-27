@@ -112,6 +112,6 @@ v4 = NVector(0, 0, 1)
 print v1 + v3
 print v1 * v2
 print v3 == v4
-print v3 != v1
+print v4 != v1
 print v1[2]
 print v1 * 3

@@ -1,4 +1,4 @@
-def to_json(obj, raise_unknown=False):
+def to_json(obj, raise_unknown = False):
     string = ""
     count = 0
     if isinstance(obj, dict):

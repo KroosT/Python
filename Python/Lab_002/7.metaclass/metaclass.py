@@ -1,5 +1,5 @@
 # Metaclass
-def wrap(path):
+def wrapper(path):
     class MyMetaClass(type):
         def __new__(mcs, name, bases, dct):
             f = open(path, 'r')
@@ -13,7 +13,7 @@ def wrap(path):
 class NewClass:
     def __init__(self):
         pass
-    __metaclass__ = wrap('/home/kroos/Python/Lab_002/7.metaclass/test_err')
+    __metaclass__ = wrapper('/home/kroos/Python/Lab_002/7.metaclass/test_err')
 
 
 c = NewClass()
