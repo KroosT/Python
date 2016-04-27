@@ -13,8 +13,6 @@ class Filter(object):
         for i in range(len(self.object)):
             if function(self.object[i]):
                 yield self.object[i]
-            else:
-                pass
 
 
 def even(number):

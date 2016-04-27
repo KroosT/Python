@@ -24,7 +24,11 @@ def to_json(obj, raise_unknown=False):
         return string
 
     elif type(obj) == str or type(obj) == unicode:
-        string += '"' + obj + '"'
+        string += '"'
+        for o in obj:
+            if o == '"':
+                string += "\\"
+            string += o
         return string
 
     elif obj is True:
@@ -58,5 +62,5 @@ class Unknown(object):
         self.a = 3
 
 x = Unknown()
-lst = [1, {"a": 1}, 5, "434", 'ewe', [{"fsd": "fd"}, (1, 3)]]
+lst = [1, {"a": 1}, 5, "434", 'ew"e', [{"fsd": "fd"}, (1, 3)]]
 print to_json(lst)

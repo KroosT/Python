@@ -47,14 +47,17 @@ class NVector(object):
 
     def __mul__(self, other):
         v = NVector()
-
+        sum_ = 0
         if type(other) != type(self):
             for i in range(len(self.lst)):
                 v.push(self.lst[i] * other)
+            return v
         else:
             for i in range(len(self.lst)):
                 v.push(self.lst[i] * other[i])
-        return v
+            for i in range(len(v)):
+                sum_ += v[i]
+            return sum_
 
     def __eq__(self, other):
 
