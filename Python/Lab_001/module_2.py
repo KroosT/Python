@@ -1,3 +1,27 @@
+import argparse
+import sys
+
+
+def parse_args(args):
+    parser = argparse.ArgumentParser()
+    source = parser.add_mutually_exclusive_group()
+    source.add_argument('-f', '--file', type=argparse.FileType('r'),
+                        nargs='?', const='data.txt', help='get numbers from '
+                                                          'FILE (default: '
+                                                          'data.txt)')
+    sort_kind = parser.add_mutually_exclusive_group()
+    sort_kind.add_argument('-q', '--quick', action='store_const',
+                           const='q', dest='sort',
+                           help='quick sort (as default)')
+    sort_kind.add_argument('-m', '--merge', action='store_const',
+                           const='m', dest='sort', help='merge sort')
+    sort_kind.add_argument('-r', '--radix', action='store_const',
+                           const='r', dest='sort', help='radix sort')
+    sort_kind.set_defaults(sort='q')
+    source.set_defaults(file='data.txt')
+    return parser.parse_args(args)
+
+
 def quick_sort(lst, first, last):
 
     if first < last:
@@ -103,20 +127,28 @@ def radix_sort(lst):
         placement *= rad
 
 
-# q_inp = raw_input('Input list of numbers for QuickSort: ')
-# m_inp = raw_input('Input list of numbers for MergeSort: ')
-with open('data.txt', 'r') as myfile:
-    for line in myfile:
-        if len(line.split()) == 10:
-            r_inp = line.split()
-            break
-        else:
-            r_inp = []
-# q_mas = q_inp.split()
-# m_mas = m_inp.split()
-# quick_sort(q_mas, 0, len(q_mas) - 1)
-# merge_sort(m_mas)
-radix_sort(r_inp)
-# print q_mas
-# print m_mas
-print r_inp
+def main(argv):
+    args = parse_args(argv)
+    inp = []
+    if args.file is not None:
+        with args.file as myfile:
+            for line in myfile:
+                if len(line.split()) == 10:
+                    inp = line.split()
+                    break
+                else:
+                    inp = []
+    # q_mas = q_inp.split()
+    # m_mas = m_inp.split()
+    # quick_sort(q_mas, 0, len(q_mas) - 1)
+    # merge_sort(m_mas)
+    if args.sort == 'q':
+        quick_sort(inp, 0, len(inp) - 1)
+    elif args.sort == 'm':
+        merge_sort(inp)
+    elif args.sort == 'r':
+        radix_sort(inp)
+    print inp
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

@@ -1,3 +1,18 @@
+import argparse
+import sys
+
+
+def parse_args(args):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--file', type=argparse.FileType('r'), nargs='?',
+                        const='data.txt', help='read text from FILE ('
+                                               'default: text.txt)')
+    parser.add_argument('-n', type=int, default=2, help='n in n-grams stats')
+    parser.add_argument('-k', type=int, default=6, help='k in n-grams stats')
+    parser.set_defaults(file='data.txt')
+    return parser.parse_args(args)
+
+
 def repeat_word_counter(t_lst):
 
     t_dct = dict()
@@ -83,32 +98,37 @@ def sort_func(u_grams):
     return s_grams
 
 
-with open('data.txt', 'r') as myfile:
-    string = myfile.readline()
-    n_gr = int(myfile.readline())
-    k_gr = int(myfile.readline())
-lst = string.split()
-temp = del_specials(lst)
-lst = temp[0]
-count = temp[1]
-words_in_sentence = temp[2]
-average = average_number_of_words(lst, count)
-dct = repeat_word_counter(lst)
-median = median_value(words_in_sentence)
-grams = n_grams(lst, n_gr)
-grams = sort_func(grams)
-keys = dct.keys()
-i = -1
-for value in dct:
-    i += 1
-    print 'Word "{}" repeats {} times'.format(keys[i], dct[value])
-print 'Average number of words is {} per sentence'.format(average)
-print 'Median number of words in sentence is {}'.format(median)
-print 'Top-{} the most repeated {}-grams: '.format(k_gr, n_gr)
-jt = -1
-for g in grams:
-    jt += 1
-    if jt <= k_gr - 1:
-        print '{}: {} - {}'.format(jt + 1, g[0], g[1])
-    else:
-        break
+def main(argv):
+    args = parse_args(argv)
+    string = ""
+    if args.file is not None:
+        with args.file as myfile:
+            string = myfile.readline()
+    lst = string.split()
+    temp = del_specials(lst)
+    lst = temp[0]
+    count = temp[1]
+    words_in_sentence = temp[2]
+    average = average_number_of_words(lst, count)
+    dct = repeat_word_counter(lst)
+    median = median_value(words_in_sentence)
+    grams = n_grams(lst, args.n)
+    grams = sort_func(grams)
+    keys = dct.keys()
+    i = -1
+    for value in dct:
+        i += 1
+        print 'Word "{}" repeats {} times'.format(keys[i], dct[value])
+    print 'Average number of words is {} per sentence'.format(average)
+    print 'Median number of words in sentence is {}'.format(median)
+    print 'Top-{} the most repeated {}-grams: '.format(args.k, args.n)
+    jt = -1
+    for g in grams:
+        jt += 1
+        if jt <= args.k - 1:
+            print '{}: {} - {}'.format(jt + 1, g[0], g[1])
+        else:
+            break
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
