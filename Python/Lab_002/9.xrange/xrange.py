@@ -53,4 +53,9 @@ def test_xrange():
     for x in XRange(5, 3, -1):
         print x
 
-test_xrange()
+
+def main():
+    test_xrange()
+
+if __name__ == '__main__':
+    main()

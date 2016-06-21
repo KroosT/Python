@@ -104,14 +104,18 @@ class NVector(object):
         self.lst.append(value)
 
 
-v1 = NVector(0, 1, 2, 3)
-v2 = NVector(0, 1, 2, 3)
-v3 = NVector(0, 1, 1)
-v4 = NVector(0, 0, 1)
+def main():
+    v1 = NVector(0, 1, 2, 3)
+    v2 = NVector(0, 1, 2, 3)
+    v3 = NVector(0, 1, 1)
+    v4 = NVector(0, 0, 1)
 
-print v1 + v3
-print v1 * v2
-print v3 == v4
-print v4 != v1
-print v1[2]
-print v1 * 3
+    print v1 + v3
+    print v1 * v2
+    print v3 == v4
+    print v4 != v1
+    print v1[2]
+    print v1 * 3
+
+if __name__ == '__main__':
+    main()

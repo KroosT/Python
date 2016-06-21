@@ -30,6 +30,11 @@ def union(*args):
     string += "}"
     return string
 
-print union(0, 1, 3, [1, 3])
-print union(0, 1, 3, [1, 3])
-print union(0, 1, 2)
+
+def main():
+    print union(0, 1, 3, [1, 3])
+    print union(0, 1, 3, [1, 3])
+    print union(0, 1, 2)
+
+if __name__ == '__main__':
+    main()

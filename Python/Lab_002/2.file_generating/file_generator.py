@@ -23,17 +23,22 @@ def file_generator(field_count, bool_numeric, field_sep, str_sep, str_count):
                 f.write(str_sep)
             _str += 1
 
-parser = argparse.ArgumentParser()
-parser.add_argument('-sc', '--str_count', type=int, default=5,
-                    help='Count of strings in the generated file')
-parser.add_argument('-fc', '--field_count', type=int, default=5,
-                    help='Count of fields in the generated file')
-parser.add_argument('-ss', '--str_sep', type=str, default='\n',
-                    help='String separator')
-parser.add_argument('-fs', '--field_sep', type=str, default='\t',
-                    help='Field separator')
-parser.add_argument('-n', '--numeric', action='store_true', default=False,
-                    help='Field as numbers')
-args = parser.parse_args()
-file_generator(args.field_count, args.numeric, args.field_sep,
-               args.str_sep, args.str_count)
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-sc', '--str_count', type=int, default=5,
+                        help='Count of strings in the generated file')
+    parser.add_argument('-fc', '--field_count', type=int, default=5,
+                        help='Count of fields in the generated file')
+    parser.add_argument('-ss', '--str_sep', type=str, default='\n',
+                        help='String separator')
+    parser.add_argument('-fs', '--field_sep', type=str, default='\t',
+                        help='Field separator')
+    parser.add_argument('-n', '--numeric', action='store_true', default=False,
+                        help='Field as numbers')
+    args = parser.parse_args()
+    file_generator(args.field_count, args.numeric, args.field_sep,
+                   args.str_sep, args.str_count)
+
+if __name__ == '__main__':
+    main()

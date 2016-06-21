@@ -16,5 +16,9 @@ class NewClass:
     __metaclass__ = wrapper('/home/kroos/Python/Lab_002/7.metaclass/test_err')
 
 
-c = NewClass()
-print c.number1
+def main():
+    c = NewClass()
+    print c.number1
+
+if __name__ == '__main__':
+    main()

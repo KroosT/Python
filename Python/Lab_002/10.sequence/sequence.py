@@ -22,5 +22,10 @@ def even(number):
     else:
         return False
 
-a = Filter([5, 1, 2, 3, 4])
-print list(a.deselect(even))
+
+def main():
+    a = Filter([5, 1, 2, 3, 4])
+    print list(a.deselect(even))
+
+if __name__ == '__main__':
+    main()

@@ -43,4 +43,9 @@ def test():
     t.multiply(5, 2)
     print str(t)
 
-test()
+
+def main():
+    test()
+
+if __name__ == '__main__':
+    main()

@@ -6,6 +6,7 @@ def to_json(obj, raise_unknown = False):
         for element in obj:
             count += 1
             string += to_json(element, raise_unknown)
+            string += ": " + to_json(obj[element], raise_unknown)
             if count != len(obj):
                 string += ", "
         return string + "}"
@@ -29,7 +30,7 @@ def to_json(obj, raise_unknown = False):
             if o == '"':
                 string += "\\"
             string += o
-        return string
+        return string + '"'
 
     elif obj is True:
         return "true"
@@ -61,6 +62,11 @@ class Unknown(object):
         super(Unknown, self).__init__()
         self.a = 3
 
-x = Unknown()
-lst = [1, {"a": 1}, 5, "434", 'ew"e', [{"fsd": "fd"}, (1, 3)]]
-print to_json(lst)
+
+def main():
+    x = Unknown()
+    lst = [1, {"a": 1}, 5, "434", 'ewe', [{"fsd": "fd"}, (1, x.a)]]
+    print to_json(lst)
+
+if __name__ == '__main__':
+    main()
