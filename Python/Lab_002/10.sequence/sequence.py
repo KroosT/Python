@@ -1,7 +1,9 @@
 class Filter(object):
 
     def __init__(self, args):
-        self.object = [elem for elem in args]
+        self.object = []
+        for element in args:
+            self.object.append(element)
 
     def __iter__(self):
         return iter(self.object)

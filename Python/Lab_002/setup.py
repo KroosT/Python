@@ -8,7 +8,7 @@ setup(
     long_description=open(join(dirname(__file__), 'readme.txt')).read(),
     entry_points={
         'console_scripts':
-            ['file_generating = 2.file_generating.file_generator:main',
+            ['file_generating = file_generating.file_generator:main',
              'to_json = to_json.to_json:main',
              'n-vector = 4.nvector.nvector:main',
              'logger = 5.logger.logger:main',

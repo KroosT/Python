@@ -1,22 +1,17 @@
 def cached(function):
 
     def wrapper(*args):
-        
-        wrapper.previous_args = ""
-        try:
-            wrapper.count += 1
-        except AttributeError:
-            wrapper.count = 1
-            wrapper.dict = {}
 
-        for i in range(len(args)):
-            wrapper.previous_args += str(args[i])
-        if wrapper.previous_args in wrapper.dict:
-            return wrapper.dict[wrapper.previous_args]
-        else:
-            result = function(*args)
-            wrapper.dict[wrapper.previous_args] = result
-            return result
+        try:
+            if str(args) in wrapper.previous_args_dict:
+                print 'Same args detected'
+                return wrapper.previous_args_dict[str(args)]
+            else:
+                wrapper.previous_args_dict[str(args)] = function(*args)
+                return wrapper.previous_args_dict[str(args)]
+        except AttributeError:
+            wrapper.previous_args_dict = {str(args): function(*args)}
+            return wrapper.previous_args_dict[str(args)]
     return wrapper
 
 
@@ -34,6 +29,7 @@ def union(*args):
 def main():
     print union(0, 1, 3, [1, 3])
     print union(0, 1, 3, [1, 3])
+    print union(0, 1, 2)
     print union(0, 1, 2)
 
 if __name__ == '__main__':
